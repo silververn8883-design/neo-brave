@@ -10,8 +10,8 @@
   --gold: #e8b95a;
   --white-soft: #fffaf0;
   --max: 1160px;
-  --brand-logo-image: url("assets/neo-brave-logo.svg");
-  --hero-workshop-image: url("assets/neo-brave-workshop.png");
+  --brand-logo-image: url("assets/neo-brave-logo-animated.png"), url("assets/neo-brave-logo.svg");
+  --hero-workshop-image: url("assets/neo-brave-workshop-left-logo.png");
 }
 
 * {
@@ -75,20 +75,9 @@ a {
   color: transparent;
   font-size: 0;
   background-image: var(--brand-logo-image, none);
-  background-size: cover;
+  background-size: cover, cover;
   background-position: center;
   box-shadow: 0 0 18px rgba(240, 68, 68, 0.28);
-}
-
-.brand-symbol::after {
-  content: "";
-  position: absolute;
-  inset: -22% 34% 44% 42%;
-  background: linear-gradient(180deg, transparent, rgba(80, 215, 255, 0.95), #ffffff, transparent);
-  clip-path: polygon(48% 0, 70% 0, 56% 38%, 74% 38%, 34% 100%, 44% 50%, 28% 50%);
-  opacity: 0;
-  filter: drop-shadow(0 0 8px rgba(76, 216, 255, 0.9));
-  animation: lightning-flicker 4.6s steps(1, end) infinite;
 }
 
 .nav-links {
@@ -148,54 +137,6 @@ a {
   position: relative;
   width: min(660px, 100%);
   animation: rise-in 900ms ease both;
-}
-
-.hero-logo-lockup {
-  position: relative;
-  overflow: hidden;
-  display: inline-grid;
-  width: min(280px, 62vw);
-  aspect-ratio: 1 / 1;
-  place-items: center;
-  margin-bottom: 24px;
-  border: 0;
-  border-radius: 0;
-  background:
-    var(--brand-logo-image, linear-gradient(145deg, #151821, #0b1018));
-  background-size: contain;
-  background-position: center;
-  background-repeat: no-repeat;
-  box-shadow:
-    0 0 54px rgba(240, 68, 68, 0.3),
-    0 0 86px rgba(35, 200, 192, 0.12);
-}
-
-.hero-logo-lockup::before,
-.hero-logo-lockup::after {
-  content: "";
-  position: absolute;
-  pointer-events: none;
-}
-
-.hero-logo-lockup::before {
-  inset: -10% 41% 45% 44%;
-  background: linear-gradient(180deg, transparent 0%, rgba(37, 210, 255, 0.75) 34%, #ffffff 50%, rgba(37, 210, 255, 0.9) 68%, transparent 100%);
-  clip-path: polygon(50% 0, 69% 0, 56% 38%, 76% 38%, 30% 100%, 43% 51%, 26% 51%);
-  opacity: 0;
-  filter:
-    drop-shadow(0 0 10px rgba(80, 215, 255, 0.95))
-    drop-shadow(0 0 28px rgba(80, 215, 255, 0.58));
-  animation: lightning-flicker 3.8s steps(1, end) infinite;
-}
-
-.hero-logo-lockup::after {
-  inset: 0;
-  background:
-    radial-gradient(circle at 51% 17%, rgba(107, 227, 255, 0.88), transparent 13%),
-    radial-gradient(circle at 50% 28%, rgba(240, 68, 68, 0.3), transparent 42%);
-  opacity: 0;
-  mix-blend-mode: screen;
-  animation: logo-light-burst 3.8s steps(1, end) infinite;
 }
 
 .motion-grid,
