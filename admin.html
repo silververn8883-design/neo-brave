@@ -1,0 +1,148 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Neo Brave 관리창</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body class="admin-page">
+    <header class="site-header" aria-label="관리 메뉴">
+      <a class="brand-mark" href="index.html" aria-label="Neo Brave 홈">
+        <span class="brand-symbol">NB</span>
+        <span>Neo Brave</span>
+      </a>
+      <nav class="nav-links" aria-label="관리 이동">
+        <a href="index.html">사이트</a>
+        <a href="#brand-admin">브랜드</a>
+        <a href="#review-admin">리뷰</a>
+        <a href="#contact-admin">연락</a>
+      </nav>
+    </header>
+
+    <main class="admin-shell">
+      <section class="admin-hero" aria-labelledby="admin-title">
+        <p class="eyebrow">Owner Control Room</p>
+        <h1 id="admin-title">관리창</h1>
+        <p>
+          사이트 문구, 리뷰 게시글, 연락처를 직접 바꿀 수 있습니다. 댓글 기능은 없고, 리뷰에는
+          좋아요와 싫어요 반응만 표시됩니다.
+        </p>
+      </section>
+
+      <section class="admin-grid" aria-label="관리 패널">
+        <form class="admin-panel" id="brand-admin">
+          <div class="admin-panel-heading">
+            <p class="section-kicker">Brand</p>
+            <h2>첫 화면 관리</h2>
+          </div>
+          <label>
+            상단 문구
+            <input name="eyebrow" type="text" />
+          </label>
+          <label>
+            메인 이름
+            <input name="heroTitle" type="text" />
+          </label>
+          <label>
+            소개 문장
+            <textarea name="heroCopy" rows="4"></textarea>
+          </label>
+          <div class="form-pair">
+            <label>
+              현재 상태
+              <input name="nowStatus" type="text" />
+            </label>
+            <label>
+              다음 목표
+              <input name="nextStatus" type="text" />
+            </label>
+          </div>
+          <label>
+            브랜드 설명 제목
+            <input name="introTitle" type="text" />
+          </label>
+          <label>
+            브랜드 설명 본문
+            <textarea name="introCopy" rows="5"></textarea>
+          </label>
+          <label>
+            푸터 문구
+            <input name="footerTagline" type="text" />
+          </label>
+          <button class="button primary" type="submit">브랜드 저장</button>
+        </form>
+
+        <section class="admin-panel" id="review-admin">
+          <div class="admin-panel-heading">
+            <p class="section-kicker">Reviews</p>
+            <h2>리뷰 관리</h2>
+          </div>
+          <form class="review-editor" data-review-form>
+            <input name="id" type="hidden" />
+            <label>
+              분류
+              <input name="category" type="text" placeholder="Anime / Game / Tokusatsu" />
+            </label>
+            <label>
+              제목
+              <input name="title" type="text" />
+            </label>
+            <label>
+              요약
+              <textarea name="summary" rows="4"></textarea>
+            </label>
+            <div class="form-pair">
+              <label>
+                태그
+                <input name="tag" type="text" />
+              </label>
+              <label>
+                좋아요 기본값
+                <input name="likes" type="number" min="0" />
+              </label>
+            </div>
+            <label>
+              싫어요 기본값
+              <input name="dislikes" type="number" min="0" />
+            </label>
+            <div class="admin-actions">
+              <button class="button primary" type="submit">리뷰 저장</button>
+              <button class="button secondary" type="button" data-clear-review>새 리뷰 작성</button>
+            </div>
+          </form>
+          <div class="admin-list" data-review-admin-list aria-live="polite"></div>
+        </section>
+
+        <section class="admin-panel" id="contact-admin">
+          <div class="admin-panel-heading">
+            <p class="section-kicker">Links</p>
+            <h2>연락처 관리</h2>
+          </div>
+          <div class="admin-list" data-contact-admin-list></div>
+          <button class="button secondary" type="button" data-add-contact>연락처 추가</button>
+        </section>
+
+        <section class="admin-panel wide">
+          <div class="admin-panel-heading">
+            <p class="section-kicker">Data</p>
+            <h2>백업과 초기화</h2>
+          </div>
+          <p class="admin-help">
+            저장한 내용은 이 브라우저에 보관됩니다. 공개 사이트의 기본 내용을 바꾸려면 내보낸 데이터를
+            `data.js`에 반영하는 방식으로 확장할 수 있습니다.
+          </p>
+          <textarea data-data-box rows="10" spellcheck="false"></textarea>
+          <div class="admin-actions">
+            <button class="button primary" type="button" data-export-data>현재 데이터 보기</button>
+            <button class="button secondary" type="button" data-import-data>붙여넣은 데이터 적용</button>
+            <button class="button secondary danger" type="button" data-reset-data>초기값으로 되돌리기</button>
+          </div>
+        </section>
+      </section>
+    </main>
+
+    <script src="data.js"></script>
+    <script src="admin.js"></script>
+  </body>
+</html>

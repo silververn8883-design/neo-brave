@@ -1,0 +1,175 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      name="description"
+      content="Neo Brave는 애니, 게임, 특촬 리뷰에서 출발해 코스튬과 피규어 제작으로 확장하는 개인 제작소입니다."
+    />
+    <title>Neo Brave | 리뷰와 제작의 개인 공방</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header class="site-header" aria-label="주요 메뉴">
+      <a class="brand-mark" href="#top" aria-label="Neo Brave 홈">
+        <span class="brand-symbol">NB</span>
+        <span>Neo Brave</span>
+      </a>
+      <nav class="nav-links" aria-label="페이지 이동">
+        <a href="#reviews">리뷰</a>
+        <a href="#atelier">공방</a>
+        <a href="#journal">기록</a>
+        <a href="#contact">연락</a>
+        <a href="admin.html">관리</a>
+      </nav>
+    </header>
+
+    <main id="top">
+      <section class="hero" aria-labelledby="hero-title">
+        <img class="hero-image" src="assets/neo-brave-hero.svg" alt="" />
+        <div class="hero-shade" aria-hidden="true"></div>
+        <div class="motion-grid" aria-hidden="true">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+        <div class="signal-lines" aria-hidden="true">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+        <div class="hero-content">
+          <p class="eyebrow" data-bind="brand.eyebrow">Review Channel & Future Maker Studio</p>
+          <h1 id="hero-title" data-bind="brand.heroTitle">Neo Brave</h1>
+          <p class="hero-copy" data-bind="brand.heroCopy">
+            애니, 게임, 특촬을 깊게 보고 기록하는 리뷰어. 그리고 언젠가 직접 입고 전시할
+            코스튬과 피규어를 만드는 개인 공방.
+          </p>
+          <div class="hero-actions" aria-label="주요 이동">
+            <a class="button primary" href="#reviews">리뷰 방향 보기</a>
+            <a class="button secondary" href="#atelier">공방 로드맵</a>
+          </div>
+        </div>
+        <div class="hero-status" aria-label="Neo Brave 현재 상태">
+          <span>Now</span>
+          <strong data-bind="brand.nowStatus">리뷰 브랜드 준비</strong>
+          <span>Next</span>
+          <strong data-bind="brand.nextStatus">코스튬 · 피규어 제작</strong>
+        </div>
+      </section>
+
+      <section class="intro-section" aria-labelledby="intro-title">
+        <div class="section-inner split">
+          <div>
+            <p class="section-kicker">Brand Concept</p>
+            <h2 id="intro-title" data-bind="brand.introTitle">좋아하는 세계를 분석하고, 손으로 다시 만드는 곳.</h2>
+          </div>
+          <p data-bind="brand.introCopy">
+            Neo Brave는 단순한 감상 기록이 아니라 작품의 세계관, 디자인, 액션, 장난감성,
+            팬 경험까지 함께 읽는 아카이브입니다. 리뷰로 쌓은 눈을 바탕으로, 나중에는
+            슈트, 소품, 피규어 제작까지 이어지는 공방 브랜드로 성장시키는 것을 목표로 합니다.
+          </p>
+        </div>
+      </section>
+
+      <section class="content-section" id="reviews" aria-labelledby="reviews-title">
+        <div class="section-inner">
+          <div class="section-heading">
+            <p class="section-kicker">Reviews</p>
+            <h2 id="reviews-title">댓글 없는 리뷰 보드</h2>
+            <p class="section-note">
+              리뷰에는 댓글 입력란을 두지 않고, 방문자는 좋아요와 싫어요 반응만 남길 수 있습니다.
+            </p>
+          </div>
+          <div class="review-board" data-review-list aria-live="polite">
+            <article class="review-card is-loading">
+              <span class="card-label">Loading</span>
+              <h3>리뷰를 불러오는 중</h3>
+              <p>관리창에서 새 리뷰를 추가할 수 있습니다.</p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="atelier-section" id="atelier" aria-labelledby="atelier-title">
+        <div class="section-inner split">
+          <div>
+            <p class="section-kicker">Atelier Roadmap</p>
+            <h2 id="atelier-title">리뷰어에서 제작자로 확장하는 계획</h2>
+          </div>
+          <div class="timeline" aria-label="공방 성장 단계">
+            <article class="timeline-item">
+              <span>01</span>
+              <h3>리뷰 아카이브 구축</h3>
+              <p>작품 리뷰, 디자인 분석, 굿즈 기록을 쌓아 Neo Brave의 취향과 기준을 선명하게 만듭니다.</p>
+            </article>
+            <article class="timeline-item">
+              <span>02</span>
+              <h3>제작 테스트 공개</h3>
+              <p>헬멧, 무기 소품, 소형 피규어 도색 같은 작은 작업부터 과정 중심으로 공유합니다.</p>
+            </article>
+            <article class="timeline-item">
+              <span>03</span>
+              <h3>전문 공방 전환</h3>
+              <p>주문 제작, 전시용 피규어, 촬영용 코스튬까지 다루는 Neo Brave Atelier로 발전시킵니다.</p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="content-section" id="journal" aria-labelledby="journal-title">
+        <div class="section-inner">
+          <div class="section-heading">
+            <p class="section-kicker">Journal Format</p>
+            <h2 id="journal-title">올릴 콘텐츠 예시</h2>
+          </div>
+          <div class="card-grid four">
+            <article class="mini-card">
+              <h3>첫인상 리뷰</h3>
+              <p>신작 1화, 데모, 공개 트레일러를 빠르게 정리합니다.</p>
+            </article>
+            <article class="mini-card">
+              <h3>디자인 분석</h3>
+              <p>슈트 라인, 컬러, 무장, 실루엣을 제작자 시선으로 봅니다.</p>
+            </article>
+            <article class="mini-card">
+              <h3>팬 아이템 기록</h3>
+              <p>피규어, 프라모델, 변신 아이템, 게임 굿즈를 보관합니다.</p>
+            </article>
+            <article class="mini-card">
+              <h3>메이킹 노트</h3>
+              <p>도색, 출력, 재료 테스트, 실패 로그까지 남깁니다.</p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="contact-section" id="contact" aria-labelledby="contact-title">
+        <div class="section-inner contact-layout">
+          <div>
+            <p class="section-kicker">Contact</p>
+            <h2 id="contact-title">Neo Brave의 첫 거점을 여기서 시작합니다.</h2>
+            <p>
+              아직 링크가 정해지지 않았다면 아래 항목만 나중에 바꾸면 됩니다. GitHub Pages에 올린 뒤
+              YouTube, 블로그, SNS, 의뢰 메일을 차례로 연결하세요.
+            </p>
+          </div>
+          <div class="contact-links" data-contact-list aria-label="외부 링크">
+            <a href="#" aria-label="YouTube 링크 준비 중">YouTube 준비 중</a>
+            <a href="#" aria-label="Blog 링크 준비 중">Blog 준비 중</a>
+            <a href="#" aria-label="SNS 링크 준비 중">SNS 준비 중</a>
+            <a href="mailto:hello@example.com">hello@example.com</a>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <span>Neo Brave</span>
+      <span data-bind="brand.footerTagline">Reviews today. Atelier tomorrow.</span>
+    </footer>
+    <script src="data.js"></script>
+    <script src="script.js"></script>
+  </body>
+</html>
