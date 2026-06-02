@@ -71,7 +71,10 @@
   function showAdmin() {
     $("[data-admin-login]").hidden = true;
     $("[data-admin-content]").hidden = false;
-    $("[data-admin-nav]").hidden = false;
+    document.querySelectorAll("[data-admin-private]").forEach((item) => {
+      item.hidden = false;
+    });
+    $("[data-admin-auth-toggle]").textContent = "로그아웃";
     document.body.classList.remove("admin-locked");
     document.body.classList.add("admin-unlocked");
     initAdmin();
@@ -80,7 +83,10 @@
   function showLogin() {
     $("[data-admin-login]").hidden = false;
     $("[data-admin-content]").hidden = true;
-    $("[data-admin-nav]").hidden = true;
+    document.querySelectorAll("[data-admin-private]").forEach((item) => {
+      item.hidden = true;
+    });
+    $("[data-admin-auth-toggle]").textContent = "로그인";
     document.body.classList.add("admin-locked");
     document.body.classList.remove("admin-unlocked");
     prepareAuthScreen();
@@ -123,7 +129,15 @@
 
     prepareAuthScreen();
 
-    $("[data-admin-logout]").addEventListener("click", logoutAdmin);
+    $("[data-admin-auth-toggle]").addEventListener("click", () => {
+      if (document.body.classList.contains("admin-unlocked")) {
+        logoutAdmin();
+        return;
+      }
+
+      $("[data-admin-login]").scrollIntoView({ behavior: "smooth", block: "center" });
+      form.elements.passcode.focus();
+    });
 
     if (sessionStorage.getItem(authSessionKey) === "yes") {
       showAdmin();

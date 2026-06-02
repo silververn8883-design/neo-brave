@@ -12,12 +12,12 @@
         <span class="brand-symbol">NB</span>
         <span>Neo Brave</span>
       </a>
-      <nav class="nav-links" aria-label="관리 이동" data-admin-nav hidden>
+      <nav class="nav-links" aria-label="관리 이동" data-admin-nav>
         <a href="index.html">사이트</a>
-        <a href="#brand-admin">브랜드</a>
-        <a href="#review-admin">리뷰</a>
-        <a href="#contact-admin">연락</a>
-        <button class="nav-button" type="button" data-admin-logout>로그아웃</button>
+        <a href="#brand-admin" data-admin-private hidden>브랜드</a>
+        <a href="#review-admin" data-admin-private hidden>리뷰</a>
+        <a href="#contact-admin" data-admin-private hidden>연락</a>
+        <button class="nav-button" type="button" data-admin-auth-toggle>로그인</button>
       </nav>
     </header>
 

@@ -11,11 +11,15 @@
   --white-soft: #fffaf0;
   --max: 1160px;
   --brand-logo-image: url("assets/neo-brave-logo-animated.png"), url("assets/neo-brave-logo.svg");
-  --hero-workshop-image: url("assets/neo-brave-workshop-final.png");
+  --hero-workshop-image: url("assets/neo-brave-workshop-clean.png");
 }
 
 * {
   box-sizing: border-box;
+}
+
+[hidden] {
+  display: none !important;
 }
 
 html {
