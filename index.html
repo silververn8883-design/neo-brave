@@ -13,7 +13,7 @@
   <body>
     <header class="site-header" aria-label="주요 메뉴">
       <a class="brand-mark" href="#top" aria-label="Neo Brave 홈">
-        <span class="brand-symbol">NB</span>
+        <span class="brand-symbol" aria-hidden="true"></span>
         <span>Neo Brave</span>
       </a>
       <nav class="nav-links" aria-label="페이지 이동">
@@ -27,7 +27,7 @@
 
     <main id="top">
       <section class="hero" aria-labelledby="hero-title">
-        <img class="hero-image" src="assets/neo-brave-hero.svg" alt="" />
+        <img class="hero-image" src="assets/neo-brave-workshop.png" alt="" />
         <div class="hero-shade" aria-hidden="true"></div>
         <div class="motion-grid" aria-hidden="true">
           <span></span>
@@ -40,9 +40,7 @@
           <span></span>
         </div>
         <div class="hero-content">
-          <div class="hero-logo-lockup" aria-hidden="true">
-            <span class="hero-logo-fallback">NB</span>
-          </div>
+          <div class="hero-logo-lockup" role="img" aria-label="Neo Brave 로고"></div>
           <p class="eyebrow" data-bind="brand.eyebrow">Review Channel & Future Maker Studio</p>
           <h1 id="hero-title" data-bind="brand.heroTitle">Neo Brave</h1>
           <p class="hero-copy" data-bind="brand.heroCopy">
