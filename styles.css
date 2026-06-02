@@ -138,25 +138,6 @@ a {
   background-position: center right;
 }
 
-.hero::before {
-  content: "";
-  position: absolute;
-  left: clamp(300px, 32vw, 660px);
-  top: clamp(84px, 10vh, 130px);
-  z-index: -1;
-  width: clamp(210px, 19vw, 360px);
-  height: clamp(130px, 13vw, 250px);
-  pointer-events: none;
-  background:
-    linear-gradient(112deg, transparent 26%, rgba(255, 238, 192, 0) 40%, rgba(255, 238, 192, 0.72) 49%, rgba(69, 215, 255, 0.48) 55%, transparent 68%),
-    radial-gradient(circle at 52% 28%, rgba(53, 208, 255, 0.36), transparent 40%);
-  filter: blur(9px);
-  mix-blend-mode: screen;
-  opacity: 0;
-  transform: translateX(-38%) skewX(-14deg);
-  animation: embedded-logo-shine 4.4s ease-in-out infinite;
-}
-
 .hero-image,
 .hero-shade {
   position: absolute;
@@ -932,24 +913,6 @@ h3 {
   100% {
     opacity: 0;
     transform: translateX(88%) rotate(8deg);
-  }
-}
-
-@keyframes embedded-logo-shine {
-  0%,
-  34% {
-    opacity: 0;
-    transform: translateX(-42%) skewX(-14deg);
-  }
-
-  48% {
-    opacity: 0.78;
-  }
-
-  64%,
-  100% {
-    opacity: 0;
-    transform: translateX(34%) skewX(-14deg);
   }
 }
 
