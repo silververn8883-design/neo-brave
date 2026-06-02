@@ -6,21 +6,42 @@
     <title>Neo Brave 관리창</title>
     <link rel="stylesheet" href="styles.css" />
   </head>
-  <body class="admin-page">
+  <body class="admin-page admin-locked">
     <header class="site-header" aria-label="관리 메뉴">
       <a class="brand-mark" href="index.html" aria-label="Neo Brave 홈">
         <span class="brand-symbol">NB</span>
         <span>Neo Brave</span>
       </a>
-      <nav class="nav-links" aria-label="관리 이동">
+      <nav class="nav-links" aria-label="관리 이동" data-admin-nav hidden>
         <a href="index.html">사이트</a>
         <a href="#brand-admin">브랜드</a>
         <a href="#review-admin">리뷰</a>
         <a href="#contact-admin">연락</a>
+        <button class="nav-button" type="button" data-admin-logout>로그아웃</button>
       </nav>
     </header>
 
-    <main class="admin-shell">
+    <main class="admin-login-shell" data-admin-login>
+      <section class="admin-login-card" aria-labelledby="admin-auth-title">
+        <p class="eyebrow">Owner Access</p>
+        <h1 id="admin-auth-title" data-admin-auth-title>관리 로그인</h1>
+        <p data-admin-auth-copy>관리 코드를 입력하면 관리창이 열립니다.</p>
+        <form data-admin-auth-form>
+          <label>
+            관리 코드
+            <input name="passcode" type="password" autocomplete="current-password" required />
+          </label>
+          <button class="button primary" type="submit" data-admin-auth-button>관리창 열기</button>
+        </form>
+        <p class="admin-auth-status" data-admin-auth-status aria-live="polite"></p>
+        <p class="admin-help">
+          GitHub Pages 정적 페이지라 실제 보안 로그인은 아닙니다. 민감한 정보, 비밀번호, 개인 키,
+          비공개 자료는 이 관리창에 넣지 않습니다.
+        </p>
+      </section>
+    </main>
+
+    <main class="admin-shell" data-admin-content hidden>
       <section class="admin-hero" aria-labelledby="admin-title">
         <p class="eyebrow">Owner Control Room</p>
         <h1 id="admin-title">관리창</h1>

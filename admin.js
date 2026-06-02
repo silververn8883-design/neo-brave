@@ -1,7 +1,10 @@
 (function () {
   const siteKey = "neoBraveSiteData";
+  const authHashKey = "neoBraveAdminCodeHash";
+  const authSessionKey = "neoBraveAdminUnlocked";
   const defaultData = window.NEO_BRAVE_DEFAULT_DATA || {};
   let siteData = ensureInstagram(loadData());
+  let adminReady = false;
 
   function clone(value) {
     return JSON.parse(JSON.stringify(value));
@@ -35,6 +38,99 @@
 
   function $(selector, parent = document) {
     return parent.querySelector(selector);
+  }
+
+  async function hashValue(value) {
+    const bytes = new TextEncoder().encode(value);
+    const digest = await crypto.subtle.digest("SHA-256", bytes);
+    return Array.from(new Uint8Array(digest))
+      .map((byte) => byte.toString(16).padStart(2, "0"))
+      .join("");
+  }
+
+  function setAuthMessage(message, isError = false) {
+    const status = $("[data-admin-auth-status]");
+    if (!status) return;
+    status.textContent = message;
+    status.classList.toggle("is-error", isError);
+  }
+
+  function showAdmin() {
+    $("[data-admin-login]").hidden = true;
+    $("[data-admin-content]").hidden = false;
+    $("[data-admin-nav]").hidden = false;
+    document.body.classList.remove("admin-locked");
+    document.body.classList.add("admin-unlocked");
+    initAdmin();
+  }
+
+  function prepareAuthScreen() {
+    const savedHash = localStorage.getItem(authHashKey);
+    const title = $("[data-admin-auth-title]");
+    const copy = $("[data-admin-auth-copy]");
+    const button = $("[data-admin-auth-button]");
+
+    if (savedHash) {
+      title.textContent = "관리 로그인";
+      copy.textContent = "관리 코드를 입력하면 관리창이 열립니다.";
+      button.textContent = "관리창 열기";
+      return;
+    }
+
+    title.textContent = "관리 코드 설정";
+    copy.textContent = "처음 한 번 사용할 관리 코드를 정하세요. 이 브라우저에만 저장됩니다.";
+    button.textContent = "코드 저장하고 열기";
+  }
+
+  function bindAuth() {
+    const form = $("[data-admin-auth-form]");
+    if (!form) {
+      initAdmin();
+      return;
+    }
+
+    prepareAuthScreen();
+
+    if (sessionStorage.getItem(authSessionKey) === "yes") {
+      showAdmin();
+      return;
+    }
+
+    form.addEventListener("submit", async (event) => {
+      event.preventDefault();
+      const passcode = String(new FormData(form).get("passcode") || "").trim();
+      const savedHash = localStorage.getItem(authHashKey);
+
+      if (passcode.length < 4) {
+        setAuthMessage("관리 코드는 4글자 이상으로 입력하세요.", true);
+        return;
+      }
+
+      const inputHash = await hashValue(passcode);
+
+      if (!savedHash) {
+        localStorage.setItem(authHashKey, inputHash);
+        sessionStorage.setItem(authSessionKey, "yes");
+        setAuthMessage("");
+        showAdmin();
+        return;
+      }
+
+      if (inputHash !== savedHash) {
+        setAuthMessage("관리 코드가 맞지 않습니다.", true);
+        form.elements.passcode.select();
+        return;
+      }
+
+      sessionStorage.setItem(authSessionKey, "yes");
+      setAuthMessage("");
+      showAdmin();
+    });
+
+    $("[data-admin-logout]").addEventListener("click", () => {
+      sessionStorage.removeItem(authSessionKey);
+      window.location.reload();
+    });
   }
 
   function setBrandForm() {
@@ -249,7 +345,9 @@
     });
   }
 
-  function init() {
+  function initAdmin() {
+    if (adminReady) return;
+    adminReady = true;
     setBrandForm();
     setReviewForm();
     renderReviewList();
@@ -261,5 +359,5 @@
     bindDataTools();
   }
 
-  init();
+  bindAuth();
 })();
