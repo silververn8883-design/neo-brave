@@ -182,19 +182,33 @@
   }
 
   function bindOwnerShortcut() {
-    const brand = document.querySelector(".brand-mark");
-    if (brand) {
-      brand.addEventListener("dblclick", (event) => {
-        event.preventDefault();
-        window.location.href = "admin.html";
-      });
-    }
+    let nPressCount = 0;
+    let nPressTimer = 0;
 
     document.addEventListener("keydown", (event) => {
-      if (event.ctrlKey && event.altKey && event.key.toLowerCase() === "n") {
-        event.preventDefault();
-        window.location.href = "admin.html";
+      const target = event.target;
+      const isTyping =
+        target instanceof HTMLInputElement ||
+        target instanceof HTMLTextAreaElement ||
+        target instanceof HTMLSelectElement ||
+        target?.isContentEditable;
+
+      if (isTyping || event.key.toLowerCase() !== "n") {
+        return;
       }
+
+      window.clearTimeout(nPressTimer);
+      nPressCount += 1;
+
+      if (nPressCount >= 3) {
+        nPressCount = 0;
+        window.location.href = "admin.html";
+        return;
+      }
+
+      nPressTimer = window.setTimeout(() => {
+        nPressCount = 0;
+      }, 900);
     });
   }
 
