@@ -77,6 +77,22 @@
     initAdmin();
   }
 
+  function showLogin() {
+    $("[data-admin-login]").hidden = false;
+    $("[data-admin-content]").hidden = true;
+    $("[data-admin-nav]").hidden = true;
+    document.body.classList.add("admin-locked");
+    document.body.classList.remove("admin-unlocked");
+    prepareAuthScreen();
+  }
+
+  function logoutAdmin() {
+    sessionStorage.removeItem(authSessionKey);
+    showLogin();
+    const target = `${window.location.pathname}?logout=${Date.now()}`;
+    window.location.replace(target);
+  }
+
   function prepareAuthScreen() {
     const savedHash = localStorage.getItem(authHashKey);
     const title = $("[data-admin-auth-title]");
@@ -107,10 +123,7 @@
 
     prepareAuthScreen();
 
-    $("[data-admin-logout]").addEventListener("click", () => {
-      sessionStorage.removeItem(authSessionKey);
-      window.location.reload();
-    });
+    $("[data-admin-logout]").addEventListener("click", logoutAdmin);
 
     if (sessionStorage.getItem(authSessionKey) === "yes") {
       showAdmin();
