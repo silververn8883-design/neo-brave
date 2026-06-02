@@ -41,11 +41,24 @@
   }
 
   async function hashValue(value) {
+    if (!window.crypto || !crypto.subtle || typeof TextEncoder === "undefined") {
+      return fallbackHash(value);
+    }
+
     const bytes = new TextEncoder().encode(value);
     const digest = await crypto.subtle.digest("SHA-256", bytes);
     return Array.from(new Uint8Array(digest))
       .map((byte) => byte.toString(16).padStart(2, "0"))
       .join("");
+  }
+
+  function fallbackHash(value) {
+    let hash = 2166136261;
+    for (let index = 0; index < value.length; index += 1) {
+      hash ^= value.charCodeAt(index);
+      hash = Math.imul(hash, 16777619);
+    }
+    return `fallback-${(hash >>> 0).toString(16)}`;
   }
 
   function setAuthMessage(message, isError = false) {
@@ -69,17 +82,20 @@
     const title = $("[data-admin-auth-title]");
     const copy = $("[data-admin-auth-copy]");
     const button = $("[data-admin-auth-button]");
+    const reset = $("[data-admin-reset-code]");
 
     if (savedHash) {
       title.textContent = "관리 로그인";
       copy.textContent = "관리 코드를 입력하면 관리창이 열립니다.";
       button.textContent = "관리창 열기";
+      reset.hidden = false;
       return;
     }
 
     title.textContent = "관리 코드 설정";
     copy.textContent = "처음 한 번 사용할 관리 코드를 정하세요. 이 브라우저에만 저장됩니다.";
     button.textContent = "코드 저장하고 열기";
+    reset.hidden = true;
   }
 
   function bindAuth() {
@@ -90,6 +106,11 @@
     }
 
     prepareAuthScreen();
+
+    $("[data-admin-logout]").addEventListener("click", () => {
+      sessionStorage.removeItem(authSessionKey);
+      window.location.reload();
+    });
 
     if (sessionStorage.getItem(authSessionKey) === "yes") {
       showAdmin();
@@ -106,7 +127,13 @@
         return;
       }
 
-      const inputHash = await hashValue(passcode);
+      let inputHash = "";
+      try {
+        inputHash = await hashValue(passcode);
+      } catch (_error) {
+        setAuthMessage("브라우저에서 코드를 처리하지 못했습니다. 새로고침 후 다시 시도하세요.", true);
+        return;
+      }
 
       if (!savedHash) {
         localStorage.setItem(authHashKey, inputHash);
@@ -127,9 +154,15 @@
       showAdmin();
     });
 
-    $("[data-admin-logout]").addEventListener("click", () => {
+    $("[data-admin-reset-code]").addEventListener("click", () => {
+      const ok = window.confirm("이 브라우저에 저장된 관리 코드를 지우고 새로 설정할까요?");
+      if (!ok) return;
+
+      localStorage.removeItem(authHashKey);
       sessionStorage.removeItem(authSessionKey);
-      window.location.reload();
+      form.reset();
+      prepareAuthScreen();
+      setAuthMessage("관리 코드가 초기화되었습니다. 새 코드를 입력하세요.");
     });
   }
 

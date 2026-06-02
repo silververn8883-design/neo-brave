@@ -733,6 +733,21 @@ h3 {
   color: #ffb6b6;
 }
 
+.admin-reset-code {
+  margin-top: 10px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: var(--gold);
+  font: inherit;
+  font-weight: 800;
+  cursor: pointer;
+}
+
+.admin-reset-code:hover {
+  color: var(--teal);
+}
+
 .admin-hero,
 .admin-grid {
   width: min(var(--max), 100%);
