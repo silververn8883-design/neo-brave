@@ -14,7 +14,7 @@ window.NEO_BRAVE_DEFAULT_DATA = {
   contacts: [
     { label: "YouTube 준비 중", href: "#" },
     { label: "Blog 준비 중", href: "#" },
-    { label: "SNS 준비 중", href: "#" },
+    { label: "Instagram @neobrave_kr", href: "https://www.instagram.com/neobrave_kr/" },
     { label: "hello@example.com", href: "mailto:hello@example.com" }
   ],
   reviews: [

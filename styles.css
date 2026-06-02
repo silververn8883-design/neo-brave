@@ -11,7 +11,7 @@
   --white-soft: #fffaf0;
   --max: 1160px;
   --brand-logo-image: url("assets/neo-brave-logo-animated.png"), url("assets/neo-brave-logo.svg");
-  --hero-workshop-image: url("assets/neo-brave-workshop-left-logo.png");
+  --hero-workshop-image: url("assets/neo-brave-workshop-final.png");
 }
 
 * {
@@ -80,6 +80,16 @@ a {
   box-shadow: 0 0 18px rgba(240, 68, 68, 0.28);
 }
 
+.brand-symbol::after {
+  content: "";
+  position: absolute;
+  inset: -30%;
+  background: linear-gradient(110deg, transparent 35%, rgba(255, 244, 204, 0.9) 48%, rgba(70, 214, 255, 0.55) 53%, transparent 66%);
+  mix-blend-mode: screen;
+  transform: translateX(-88%) rotate(8deg);
+  animation: mark-shine 3.6s ease-in-out infinite;
+}
+
 .nav-links {
   display: flex;
   align-items: center;
@@ -110,6 +120,25 @@ a {
   background-position: center right;
 }
 
+.hero::before {
+  content: "";
+  position: absolute;
+  left: clamp(300px, 32vw, 660px);
+  top: clamp(84px, 10vh, 130px);
+  z-index: -1;
+  width: clamp(210px, 19vw, 360px);
+  height: clamp(130px, 13vw, 250px);
+  pointer-events: none;
+  background:
+    linear-gradient(112deg, transparent 26%, rgba(255, 238, 192, 0) 40%, rgba(255, 238, 192, 0.72) 49%, rgba(69, 215, 255, 0.48) 55%, transparent 68%),
+    radial-gradient(circle at 52% 28%, rgba(53, 208, 255, 0.36), transparent 40%);
+  filter: blur(9px);
+  mix-blend-mode: screen;
+  opacity: 0;
+  transform: translateX(-38%) skewX(-14deg);
+  animation: embedded-logo-shine 4.4s ease-in-out infinite;
+}
+
 .hero-image,
 .hero-shade {
   position: absolute;
@@ -129,7 +158,7 @@ a {
 .hero-shade {
   z-index: -2;
   background:
-    linear-gradient(90deg, rgba(8, 9, 13, 0.96) 0%, rgba(8, 9, 13, 0.72) 42%, rgba(8, 9, 13, 0.12) 100%),
+    linear-gradient(90deg, rgba(8, 9, 13, 0.96) 0%, rgba(8, 9, 13, 0.7) 38%, rgba(8, 9, 13, 0.22) 68%, rgba(8, 9, 13, 0.1) 100%),
     linear-gradient(180deg, rgba(8, 9, 13, 0.42) 0%, rgba(8, 9, 13, 0.08) 48%, #08090d 100%);
 }
 
@@ -793,6 +822,42 @@ h3 {
 
   to {
     transform: translateX(330%);
+  }
+}
+
+@keyframes mark-shine {
+  0%,
+  45% {
+    opacity: 0;
+    transform: translateX(-88%) rotate(8deg);
+  }
+
+  58% {
+    opacity: 0.9;
+  }
+
+  78%,
+  100% {
+    opacity: 0;
+    transform: translateX(88%) rotate(8deg);
+  }
+}
+
+@keyframes embedded-logo-shine {
+  0%,
+  34% {
+    opacity: 0;
+    transform: translateX(-42%) skewX(-14deg);
+  }
+
+  48% {
+    opacity: 0.78;
+  }
+
+  64%,
+  100% {
+    opacity: 0;
+    transform: translateX(34%) skewX(-14deg);
   }
 }
 

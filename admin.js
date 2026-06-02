@@ -1,7 +1,7 @@
 (function () {
   const siteKey = "neoBraveSiteData";
   const defaultData = window.NEO_BRAVE_DEFAULT_DATA || {};
-  let siteData = loadData();
+  let siteData = ensureInstagram(loadData());
 
   function clone(value) {
     return JSON.parse(JSON.stringify(value));
@@ -14,6 +14,19 @@
     } catch (_error) {
       return clone(defaultData);
     }
+  }
+
+  function ensureInstagram(data) {
+    const contacts = Array.isArray(data.contacts) ? data.contacts : [];
+    const hasInstagram = contacts.some((contact) => String(contact.href || "").includes("instagram.com/neobrave_kr"));
+    if (!hasInstagram) {
+      contacts.splice(Math.max(0, contacts.length - 1), 0, {
+        label: "Instagram @neobrave_kr",
+        href: "https://www.instagram.com/neobrave_kr/"
+      });
+    }
+    data.contacts = contacts;
+    return data;
   }
 
   function saveData() {

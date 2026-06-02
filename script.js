@@ -22,7 +22,20 @@
 
   function loadSiteData() {
     const stored = loadJson(siteKey, null);
-    return stored ? { ...clone(defaultData), ...stored } : clone(defaultData);
+    return ensureInstagram(stored ? { ...clone(defaultData), ...stored } : clone(defaultData));
+  }
+
+  function ensureInstagram(data) {
+    const contacts = Array.isArray(data.contacts) ? data.contacts : [];
+    const hasInstagram = contacts.some((contact) => String(contact.href || "").includes("instagram.com/neobrave_kr"));
+    if (!hasInstagram) {
+      contacts.splice(Math.max(0, contacts.length - 1), 0, {
+        label: "Instagram @neobrave_kr",
+        href: "https://www.instagram.com/neobrave_kr/"
+      });
+    }
+    data.contacts = contacts;
+    return data;
   }
 
   function renderBoundText(data) {
@@ -43,6 +56,10 @@
         const link = document.createElement("a");
         link.href = contact.href || "#";
         link.textContent = contact.label || "링크";
+        if (link.href.startsWith("http")) {
+          link.target = "_blank";
+          link.rel = "noreferrer";
+        }
         return link;
       })
     );
