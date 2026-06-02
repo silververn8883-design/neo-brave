@@ -76,7 +76,7 @@
 
     const reviews = Array.isArray(data.reviews) ? data.reviews : [];
     if (!reviews.length) {
-      board.innerHTML = '<article class="review-card"><span class="card-label">Empty</span><h3>아직 등록된 리뷰가 없습니다.</h3><p>관리창에서 첫 리뷰를 추가하세요.</p></article>';
+      board.innerHTML = '<article class="review-card"><span class="card-label">Empty</span><h3>아직 등록된 리뷰가 없습니다.</h3><p>첫 리뷰를 준비하는 중입니다.</p></article>';
       return;
     }
 
@@ -181,6 +181,23 @@
     targets.forEach((target) => observer.observe(target));
   }
 
+  function bindOwnerShortcut() {
+    const brand = document.querySelector(".brand-mark");
+    if (brand) {
+      brand.addEventListener("dblclick", (event) => {
+        event.preventDefault();
+        window.location.href = "admin.html";
+      });
+    }
+
+    document.addEventListener("keydown", (event) => {
+      if (event.ctrlKey && event.altKey && event.key.toLowerCase() === "n") {
+        event.preventDefault();
+        window.location.href = "admin.html";
+      }
+    });
+  }
+
   function init() {
     const data = loadSiteData();
     renderBoundText(data);
@@ -188,6 +205,7 @@
     renderReviews(data);
     bindReactions();
     revealOnScroll();
+    bindOwnerShortcut();
   }
 
   init();
